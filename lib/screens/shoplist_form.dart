@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// TODO: Impor drawer yang sudah dibuat sebelumnya
+import 'package:shopping_list/widgets/left_drawer.dart';
 
 class ShopFormPage extends StatefulWidget {
     const ShopFormPage({super.key});
@@ -26,7 +26,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
               backgroundColor: Colors.indigo,
               foregroundColor: Colors.white,
             ),
-            // TODO: Tambahkan drawer yang sudah dibuat di sini
+            drawer: const LeftDrawer(),
             body: Form(
                   key: _formKey,
                   child: SingleChildScrollView(
@@ -66,7 +66,6 @@ class _ShopFormPageState extends State<ShopFormPage> {
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                           ),
-                          // TODO: Tambahkan variabel yang sesuai
                           onChanged: (String? value) {
                             setState(() {
                             _price = int.parse(value!);
@@ -95,7 +94,6 @@ class _ShopFormPageState extends State<ShopFormPage> {
                           ),
                           onChanged: (String? value) {
                             setState(() {
-                              // TODO: Tambahkan variabel yang sesuai
                               _description = value!;
                             });
                           },
@@ -112,18 +110,48 @@ class _ShopFormPageState extends State<ShopFormPage> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.indigo),
-                            ),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {}
-                            },
-                            child: const Text(
-                              "Save",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
+          style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all(Colors.indigo),
+          ),
+          onPressed: () {
+            if (_formKey.currentState!.validate()) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Produk berhasil tersimpan'),
+                    content: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                        children: [
+                          Text('Nama: $_name'),
+                          Text('Harga: $_price'),
+                          Text('Deksripsi: $_description'),
+                          
+                        ],
+                      ),
+                    ),
+                    actions: [
+                      TextButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+            _formKey.currentState!.reset();
+          },
+          child: const Text(
+            "Save",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
                         ),
                       ),
                     ]

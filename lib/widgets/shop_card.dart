@@ -20,12 +20,10 @@ class ShopCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
-                    // Navigate ke route yang sesuai (tergantung jenis tombol)
             if (item.name == "Tambah Produk") {
-              // TODO: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ShopFormPage()),
+                  MaterialPageRoute(builder: (context) => const ShopFormPage()),
                 );
             }
         },
