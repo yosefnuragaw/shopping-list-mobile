@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_list/widgets/left_drawer.dart';
-import 'package:shopping_list/screens/shoplist_form.dart';
 import 'package:shopping_list/widgets/shop_card.dart';
 
 
@@ -65,11 +64,4 @@ class MyHomePage extends StatelessWidget {
     }
 }
 
-class ShopItem {
-  final String name;
-  final IconData icon;
-
-  
-  ShopItem(this.name, this.icon);
-}
 
